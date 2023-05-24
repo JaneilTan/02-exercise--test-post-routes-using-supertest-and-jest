@@ -42,3 +42,20 @@ describe("/orders endpoint", () => {
 
 });
 
+describe("/policies endpoint", () => {
+    it('should return a new pet insurance policy when we send a POST', async () => {
+        const expectedStatus = 200
+        const requestBody = {
+            "planType": "Full",
+            "petsName": "Rex",
+            "customersName": "Mary Poppins",
+            "expiry": "2023-03-09T11:00:00.000Z"
+          }
+
+        const response = await request(app).post('/policies').send(requestBody);
+        
+        expect(response.status).toBe(expectedStatus)
+        expect(response.body).toEqual(expect.objectContaining(requestBody))
+    });
+
+});
